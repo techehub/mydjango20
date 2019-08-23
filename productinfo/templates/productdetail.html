@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+
+
+
+{% extends "mytemplate.html" %}
+
+
+
+{%  block main %}
 
 
 <h1> This is my new product detail page </h1>
@@ -29,30 +30,22 @@
 
     {% if features %}
 
-
      <tr>
         <td>Features</td>
         <td>
-
-            <ul>
-
-
+           <ul>
             {%  for  f in features %}
-
                 <li> {{ f }} </li>
-
             {% endfor%}
-
-
             </ul>
         </td>
     </tr>
 
     {% endif  %}
 
-
-
 </table>
 
-</body>
-</html>
+
+{%  endblock %}
+
+
