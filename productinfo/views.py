@@ -4,11 +4,66 @@ from django.shortcuts import render
 
 from django.http import  HttpResponse
 from django.template import loader
+from .models import Product
 
-def productdetails (r):
+def productdetails (request,pid):
+    print(request.GET)
+    print (">>>>>>>>>>>>>>>>>>>>"+ str (pid))
+
+    product =  Product.objects.get(id=pid)
+
+    data = {
+
+        "name": product.pname, "desc": product.pdesc, "price": product.price,
+
+
+    }
+
+    print ("data is ", data)
+
     template =loader.get_template("productdetail.html")
-    data= {"name": "Samsung Note 10", "desc": "Samsung Smart phone"
-           , "price" : 62000.00,
-           "hgfaghS": ["4 GB Ram", "6 Inch Display", "23 MP Camera"]}
 
-    return HttpResponse(template.render(data, r))
+
+    return HttpResponse(template.render(data , request))
+
+
+
+
+
+
+def productdetails_old (request,pid):
+    print(request.GET)
+    print (request.GET["id"])
+    print(request.GET["name"])
+    print (">>>>>>>>>>>>>>>>>>>>"+ str (pid))
+
+    template =loader.get_template("productdetail.html")
+    data=  {
+
+    "1": {"name": "Samsung Note 10", "desc": "Samsung Smart phone", "price" : 62000.00,"features": ["4 GB Ram", "6 Inch Display", "23 MP Camera"]
+          },
+    "2": {"name": "OPPO", "desc": "OPPO Phone", "price": 12000.00, "features": ["4 GB Ram", "5 Inch Display", "10 MP Camera"]}
+    }
+
+
+    return HttpResponse(template.render(data [str(pid)], request))
+
+
+
+
+def productdetailsNew (request):
+
+    pid= request.GET["id"]
+    print (">>>>>>>>>>>>>>>>>>>>"+ str (pid))
+
+    template =loader.get_template("productdetail.html")
+    data=  {
+
+    "1": {"name": "Samsung Note 10", "desc": "Samsung Smart phone", "price" : 62000.00,"features": ["4 GB Ram", "6 Inch Display", "23 MP Camera"]
+          },
+    "2": {"name": "OPPO", "desc": "OPPO Phone", "price": 12000.00, "features": ["4 GB Ram", "5 Inch Display", "10 MP Camera"]}
+    }
+
+
+    return HttpResponse(template.render(data [str(pid)], request))
+

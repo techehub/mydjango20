@@ -1,8 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from .views import  productdetails
+from .views import  productdetails,productdetailsNew
 
 urlpatterns = [
-     path ('product', productdetails)
+     path ('product/<int:pid>', productdetails),
+     path('product_new', productdetailsNew)
+
+
 
 ]
