@@ -7,6 +7,9 @@ from django.template import loader
 from .models import Product
 
 def productdetails (request,pid):
+    if request.session.__contains__("PID"):
+        print ("Session PID:::", request.session.__getitem__("PID"))
+
     print(request.GET)
     print (">>>>>>>>>>>>>>>>>>>>"+ str (pid))
 
@@ -24,10 +27,20 @@ def productdetails (request,pid):
     template =loader.get_template("productdetail.html")
 
 
-    return HttpResponse(template.render(data , request))
+    res = HttpResponse(template.render(data , request))
+
+    res.set_cookie("lastaccessed", product.pid)
+
+    if request.session.__contains__("PID"):
+        request.session.__setitem__("PID", request.session["PID"] + ":"+ product.pid )
 
 
+    else :
+        request.session.__setitem__("PID" ,  product.pid )
 
+    res.set_cookie("PIDs",request.session["PID"] )
+
+    return res
 
 
 

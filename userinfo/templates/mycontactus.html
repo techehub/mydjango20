@@ -1,10 +1,19 @@
+
+{% load static%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+
+
 </head>
 <body>
+
+<h1> My Contact Page </h1>
 
 <form action="/contactdata" method="POST">
 
